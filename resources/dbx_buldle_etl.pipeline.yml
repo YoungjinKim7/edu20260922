@@ -1,20 +1,15 @@
-# The main pipeline for dbx_buldle
-
 resources:
   pipelines:
-    dbx_buldle_etl:
-      name: dbx_buldle_etl
-      catalog: ${var.catalog}
-      schema: ${var.schema}
-      serverless: true
-      root_path: "../src/dbx_buldle_etl"
-
+    pipeline_online_retail_sdp:
+      name: online_retail_sdp
       libraries:
         - glob:
-            include: ../src/dbx_buldle_etl/transformations/**
-
-      environment:
-        dependencies:
-          # We include every dependency defined by pyproject.toml by defining an editable environment
-          # that points to the folder where pyproject.toml is deployed.
-          - --editable ${workspace.file_path}
+            include: ../src/online_retail_sdp/transformations/**
+      schema: stillse7
+      continuous: false
+      development: false
+      photon: true
+      channel: CURRENT
+      catalog: edu-stillse7-catalog
+      serverless: true
+      root_path: /Workspace/Users/stillse7@gmail.com/online_retail_sdp
